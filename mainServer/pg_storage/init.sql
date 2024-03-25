@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS public.tasks
+CREATE TABLE IF NOT EXISTS tasks
 (
     id       SERIAL PRIMARY KEY,
     username TEXT,

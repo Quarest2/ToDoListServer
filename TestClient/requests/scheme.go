@@ -1,4 +1,4 @@
-package pg_storage
+package requests
 
 import "time"
 
@@ -7,5 +7,5 @@ type Task struct {
 	Username string    `json:"Username"`
 	Task     string    `json:"Task"`
 	Deadline time.Time `json:"Deadline"`
-	IsDone   bool      `json:"Is_Done"`
+	Is_done  bool      `json:"Is_Done"`
 }

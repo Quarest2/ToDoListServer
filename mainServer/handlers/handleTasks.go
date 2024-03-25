@@ -3,10 +3,8 @@ package handlers
 import (
 	"ToDoList/ToDoListServer/mainServer/pg_storage"
 	"fmt"
-	"net/http"
-	"strconv"
-
 	"github.com/labstack/echo/v4"
+	"net/http"
 )
 
 func CreateTask(c echo.Context) error {
@@ -23,20 +21,15 @@ func CreateTask(c echo.Context) error {
 }
 
 func EditTask(c echo.Context) error {
-	id := c.Param("id")
-	fmt.Println(id)
-
-	idInt, err := strconv.Atoi(id)
-	if err != nil {
-		return c.JSON(http.StatusInternalServerError, err.Error())
-	}
+	taskStr := c.Param("task")
+	fmt.Println(taskStr)
 
 	task := pg_storage.Task{}
-	err = c.Bind(&task)
+	err := c.Bind(&task)
 	if err != nil {
 		return c.JSON(http.StatusBadRequest, err.Error())
 	}
-	updatedTask, err := pg_storage.EditTask(task, idInt)
+	updatedTask, err := pg_storage.EditTask(task, taskStr)
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, err.Error())
 	}
@@ -44,15 +37,10 @@ func EditTask(c echo.Context) error {
 }
 
 func DeleteTask(c echo.Context) error {
-	id := c.Param("id")
-	fmt.Println(id)
+	taskStr := c.Param("task")
+	fmt.Println(taskStr)
 
-	idInt, err := strconv.Atoi(id)
-	if err != nil {
-		return c.JSON(http.StatusInternalServerError, err.Error())
-	}
-
-	deletedUser, err := pg_storage.DeleteTask(idInt)
+	deletedUser, err := pg_storage.DeleteTask(taskStr)
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, err.Error())
 	}

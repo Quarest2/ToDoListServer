@@ -1,10 +1,16 @@
-package TestClient
+package main
 
-import "ToDoList/ToDoListServer/TestClient/host"
+import (
+	"ToDoList/ToDoListServer/TestClient/requests"
+	"time"
+)
 
 func main() {
-	channel := make(chan bool)
-	host.Init()
-	// This is a blocking call
-	<-channel
+	timer := time.NewTicker(time.Second * 5)
+
+	for range timer.C {
+		requests.NewPOSTReq()
+	}
+
+	time.Sleep(time.Minute * 5)
 }
